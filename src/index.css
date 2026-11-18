@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Button tactile press effect */
+.btn-press:active {
+  transform: translateY(1.5px) scale(0.985);
+}
+
+/* Authentic Thermal Receipt Paper Roll */
+.receipt-paper {
+  background: #fdfdfc;
+  color: #111827;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.receipt-paper::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: radial-gradient(circle, transparent, transparent 4px, #fdfdfc 4px, #fdfdfc 10px);
+  background-size: 16px 16px;
+}
+
+.receipt-paper::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: radial-gradient(circle, transparent, transparent 4px, #fdfdfc 4px, #fdfdfc 10px);
+  background-size: 16px 16px;
+}
+
+/* Parchi Ruled Paper Texture */
+.parchi-paper {
+  background-color: #fefce8;
+  background-image: 
+    repeating-linear-gradient(transparent, transparent 23px, #e5e7eb 24px),
+    linear-gradient(90deg, transparent 38px, #fca5a5 39px, transparent 40px);
+}
+
+/* Print Stylesheet for 80mm POS Thermal Receipt */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt, #printable-receipt * {
+    visibility: visible;
+  }
+  #printable-receipt {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 80mm;
+    margin: 0;
+    padding: 5mm;
+    box-shadow: none;
+  }
+}
+
+/* Subtle modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* ==========================================================================
+   LIGHT MODE STYLES
+   ========================================================================== */
+html.light,
+html.light body,
+html.light #root,
+html.light .min-h-screen {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html.light .bg-\[\#0B0E14\],
+html.light .bg-\[\#0b0e14\],
+html.light .bg-\[\#0F1422\],
+html.light .bg-\[\#0f1422\] {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+html.light header,
+html.light nav,
+html.light .bg-\[\#0E131F\],
+html.light .bg-\[\#0e131f\],
+html.light .bg-\[\#131722\],
+html.light .bg-\[\#141A28\],
+html.light .bg-\[\#141a28\],
+html.light .bg-\[\#171D2B\],
+html.light .bg-\[\#171d2b\],
+html.light .bg-\[\#1E2638\] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light header {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .bg-\[\#131722\] {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .fixed.inset-0.bg-black\/80,
+html.light .fixed.inset-0.bg-black\/70 {
+  background-color: rgba(15, 23, 42, 0.6) !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-800\/80,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/50,
+html.light .border-slate-700,
+html.light .border-slate-700\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+html.light input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html.light select,
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light .text-white,
+html.light .text-slate-100,
+html.light .text-slate-200 {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-300,
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+html.light .hover\:bg-slate-800\/50:hover,
+html.light .hover\:bg-slate-800\/60:hover,
+html.light .hover\:bg-slate-800:hover,
+html.light .hover\:bg-slate-900:hover {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-slate-900,
+html.light .bg-slate-950 {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/50,
+html.light .bg-slate-900\/40,
+html.light .bg-slate-800\/60,
+html.light .bg-slate-800\/40 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ==========================================================================
+   THEME ACCENT COLOR PRESETS
+   ========================================================================== */
+
+/* 1. BLUE (Sapphire) */
+[data-accent="blue"] .bg-emerald-500 { background-color: #2563eb !important; }
+[data-accent="blue"] .hover\:bg-emerald-600:hover { background-color: #1d4ed8 !important; }
+[data-accent="blue"] .text-emerald-400 { color: #3b82f6 !important; }
+[data-accent="blue"] .text-emerald-300 { color: #60a5fa !important; }
+[data-accent="blue"] .border-emerald-500,
+[data-accent="blue"] .border-emerald-500\/30,
+[data-accent="blue"] .border-emerald-500\/40 { border-color: #3b82f6 !important; }
+[data-accent="blue"] .bg-emerald-500\/10,
+[data-accent="blue"] .bg-emerald-500\/15,
+[data-accent="blue"] .bg-emerald-500\/20 { background-color: rgba(37, 99, 235, 0.15) !important; }
+[data-accent="blue"] .shadow-emerald-500\/20 { box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2) !important; }
+[data-accent="blue"] .focus\:border-emerald-500:focus { border-color: #3b82f6 !important; }
+[data-accent="blue"] .from-emerald-500 { --tw-gradient-from: #2563eb var(--tw-gradient-from-position) !important; }
+[data-accent="blue"] .to-teal-600 { --tw-gradient-to: #1d4ed8 var(--tw-gradient-to-position) !important; }
+
+/* 2. PURPLE (Royal Violet) */
+[data-accent="purple"] .bg-emerald-500 { background-color: #8b5cf6 !important; }
+[data-accent="purple"] .hover\:bg-emerald-600:hover { background-color: #7c3aed !important; }
+[data-accent="purple"] .text-emerald-400 { color: #8b5cf6 !important; }
+[data-accent="purple"] .text-emerald-300 { color: #a78bfa !important; }
+[data-accent="purple"] .border-emerald-500,
+[data-accent="purple"] .border-emerald-500\/30,
+[data-accent="purple"] .border-emerald-500\/40 { border-color: #8b5cf6 !important; }
+[data-accent="purple"] .bg-emerald-500\/10,
+[data-accent="purple"] .bg-emerald-500\/15,
+[data-accent="purple"] .bg-emerald-500\/20 { background-color: rgba(139, 92, 246, 0.15) !important; }
+[data-accent="purple"] .shadow-emerald-500\/20 { box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.2) !important; }
+[data-accent="purple"] .focus\:border-emerald-500:focus { border-color: #8b5cf6 !important; }
+[data-accent="purple"] .from-emerald-500 { --tw-gradient-from: #8b5cf6 var(--tw-gradient-from-position) !important; }
+[data-accent="purple"] .to-teal-600 { --tw-gradient-to: #6d28d9 var(--tw-gradient-to-position) !important; }
+
+/* 3. CYAN (Ocean Electric) */
+[data-accent="cyan"] .bg-emerald-500 { background-color: #06b6d4 !important; }
+[data-accent="cyan"] .hover\:bg-emerald-600:hover { background-color: #0891b2 !important; }
+[data-accent="cyan"] .text-emerald-400 { color: #06b6d4 !important; }
+[data-accent="cyan"] .text-emerald-300 { color: #22d3ee !important; }
+[data-accent="cyan"] .border-emerald-500,
+[data-accent="cyan"] .border-emerald-500\/30,
+[data-accent="cyan"] .border-emerald-500\/40 { border-color: #06b6d4 !important; }
+[data-accent="cyan"] .bg-emerald-500\/10,
+[data-accent="cyan"] .bg-emerald-500\/15,
+[data-accent="cyan"] .bg-emerald-500\/20 { background-color: rgba(6, 182, 212, 0.15) !important; }
+[data-accent="cyan"] .shadow-emerald-500\/20 { box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.2) !important; }
+[data-accent="cyan"] .focus\:border-emerald-500:focus { border-color: #06b6d4 !important; }
+[data-accent="cyan"] .from-emerald-500 { --tw-gradient-from: #06b6d4 var(--tw-gradient-from-position) !important; }
+[data-accent="cyan"] .to-teal-600 { --tw-gradient-to: #0e7490 var(--tw-gradient-to-position) !important; }
+
+/* 4. AMBER (Warm Sunset) */
+[data-accent="amber"] .bg-emerald-500 { background-color: #f59e0b !important; color: #1e1b4b !important; }
+[data-accent="amber"] .hover\:bg-emerald-600:hover { background-color: #d97706 !important; }
+[data-accent="amber"] .text-emerald-400 { color: #f59e0b !important; }
+[data-accent="amber"] .text-emerald-300 { color: #fbbf24 !important; }
+[data-accent="amber"] .border-emerald-500,
+[data-accent="amber"] .border-emerald-500\/30,
+[data-accent="amber"] .border-emerald-500\/40 { border-color: #f59e0b !important; }
+[data-accent="amber"] .bg-emerald-500\/10,
+[data-accent="amber"] .bg-emerald-500\/15,
+[data-accent="amber"] .bg-emerald-500\/20 { background-color: rgba(245, 158, 11, 0.15) !important; }
+[data-accent="amber"] .shadow-emerald-500\/20 { box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.2) !important; }
+[data-accent="amber"] .focus\:border-emerald-500:focus { border-color: #f59e0b !important; }
+[data-accent="amber"] .from-emerald-500 { --tw-gradient-from: #f59e0b var(--tw-gradient-from-position) !important; }
+[data-accent="amber"] .to-teal-600 { --tw-gradient-to: #b45309 var(--tw-gradient-to-position) !important; }
+
+/* 5. ROSE (Crimson Ruby) */
+[data-accent="rose"] .bg-emerald-500 { background-color: #f43f5e !important; }
+[data-accent="rose"] .hover\:bg-emerald-600:hover { background-color: #e11d48 !important; }
+[data-accent="rose"] .text-emerald-400 { color: #f43f5e !important; }
+[data-accent="rose"] .text-emerald-300 { color: #fb7185 !important; }
+[data-accent="rose"] .border-emerald-500,
+[data-accent="rose"] .border-emerald-500\/30,
+[data-accent="rose"] .border-emerald-500\/40 { border-color: #f43f5e !important; }
+[data-accent="rose"] .bg-emerald-500\/10,
+[data-accent="rose"] .bg-emerald-500\/15,
+[data-accent="rose"] .bg-emerald-500\/20 { background-color: rgba(244, 63, 94, 0.15) !important; }
+[data-accent="rose"] .shadow-emerald-500\/20 { box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.2) !important; }
+[data-accent="rose"] .focus\:border-emerald-500:focus { border-color: #f43f5e !important; }
+[data-accent="rose"] .from-emerald-500 { --tw-gradient-from: #f43f5e var(--tw-gradient-from-position) !important; }
+[data-accent="rose"] .to-teal-600 { --tw-gradient-to: #be123c var(--tw-gradient-to-position) !important; }
