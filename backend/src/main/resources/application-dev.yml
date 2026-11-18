@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    show-sql: true
+
+app:
+  seed:
+    demo-users: true    # manager@sibms.com / Manager@123 aur cashier@sibms.com / Cashier@123
+
+logging:
+  level:
+    com.sibms: DEBUG
