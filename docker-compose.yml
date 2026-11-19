@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # MySQL 8.0 Database Service
+  # ============================================================================
+  mysql:
+    image: mysql:8.0
+    container_name: sibms-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sibms
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sibms-network
+
+  # ============================================================================
+  # Spring Boot 3 Backend Service
+  # ============================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sibms-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_URL: jdbc:mysql://mysql:3306/sibms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET: tushar-sibms-local-secret-key-2026-abcdef123456
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - sibms-network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  sibms-network:
+    driver: bridge

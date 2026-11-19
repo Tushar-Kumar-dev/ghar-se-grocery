@@ -1,72 +1,123 @@
-# SIBMS Store Admin & POS Web Application (React + Vite)
+# 🛒 Ghar Se Grocery (SIBMS)
+### *Next-Generation Smart Inventory, Billing & Hyperlocal Kirana Commerce Platform*
 
-Modern, ultra-responsive Store Manager, Billing Counter, and Inward Orders Hub built with **React 18**, **Vite**, **Tailwind CSS**, and **Web Audio API**.
+[![Frontend CI/CD](https://github.com/Tushar-Kumar-dev/ghar-se-grocery/actions/workflows/frontend-ci-cd.yml/badge.svg)](https://github.com/Tushar-Kumar-dev/ghar-se-grocery/actions)
+[![Backend CI/CD](https://github.com/Tushar-Kumar-dev/ghar-se-grocery/actions/workflows/backend-ci-cd.yml/badge.svg)](https://github.com/Tushar-Kumar-dev/ghar-se-grocery/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2+-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-17_LTS-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![React](https://img.shields.io/badge/React-18+-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
 ---
 
-## 🚀 Quick Start
+## 📖 Overview
 
-### 1. Install Dependencies
-```bash
-npm install
+**Ghar Se Grocery** is an enterprise-grade, full-stack Kirana commerce and inventory automation ecosystem designed for modern local retail. It empowers neighborhood Kirana stores with quick-commerce discovery (strict 10 KM radius via Haversine geolocation), AI-powered Mandi Parchi handwriting/slip stock intake, real-time POS thermal receipt printing, digitized Khata (credit ledger), and automated WhatsApp billing alerts.
+
+---
+
+## 🏗️ System Architecture & Monorepo Structure
+
+```text
+ghar-se-grocery/
+├── .github/
+│   ├── PULL_REQUEST_TEMPLATE.md        # PR quality & checklist contract
+│   └── workflows/
+│       ├── frontend-ci-cd.yml         # Vite build, lint & Vercel deployment
+│       └── backend-ci-cd.yml          # Maven test, Docker build & Render deploy
+├── frontend/                           # React 18 + Vite + Tailwind CSS
+│   ├── src/
+│   │   ├── components/                # Modular UI (POS, Inventory, Khata, Orders)
+│   │   ├── context/                   # Global State (Auth, Store, Cart)
+│   │   └── services/                  # Location (Haversine 10KM), API & Audio
+│   ├── public/                        # PWA Manifest & App Icons
+│   ├── Dockerfile
+│   └── package.json
+├── backend/                            # Spring Boot 3 + Java 17 + MySQL
+│   ├── src/main/java/com/sibms/
+│   │   ├── config/                    # Security, CORS & OpenAPI Swagger
+│   │   ├── controller/                # REST Controllers
+│   │   ├── service/                   # Business Logic Layer
+│   │   ├── repository/                # Spring Data JPA
+│   │   └── entity/                    # Relational Database Entities
+│   ├── src/main/resources/
+│   │   ├── application.yml            # Dynamic environment properties
+│   │   └── db/migration/              # Flyway schema versioning (V1..V4)
+│   ├── Dockerfile                     # Multi-stage Eclipse Temurin JRE build
+│   └── pom.xml
+├── docker-compose.yml                  # 1-Click local development orchestration
+├── .gitignore                         # Multi-stack production ignore rules
+└── README.md
 ```
 
-### 2. Run Development Server
+---
+
+## ✨ Key Capabilities
+
+- **📍 Hyperlocal 10 KM Kirana Discovery**: Real-time GPS calculation filtering stores strictly within 10 kilometers with live distance badges.
+- **📄 AI Mandi Parchi Slip Intake**: OCR-ready parsing converting handwritten vendor invoices directly into live inward inventory.
+- **⚡ Lightning POS & Thermal Invoicing**: Barcode scanning, quick cart manipulation, hotkey checkout, and 58mm/80mm thermal receipt generation.
+- **📒 Digitized Customer Khata**: Track store credit (*Udhar*), record partial settlements, and dispatch automated WhatsApp invoice reminders.
+- **🛡️ Enterprise Security**: Stateless JWT Authentication, Role-Based Access Control (Store Admin vs Customer), and BCrypt encrypted credentials.
+- **🗄️ Zero-Drift Database Migration**: Fully automated MySQL schema lifecycle using Flyway migrations.
+
+---
+
+## 🚀 Quick Start (Local Development)
+
+### Prerequisites
+- [Docker & Docker Compose](https://www.docker.com/) installed **OR**
+- Node.js 20+ & Java 17 LTS & MySQL 8.0
+
+### Option A: 1-Click Launch with Docker Compose (Recommended)
 ```bash
+# Clone the repository
+git clone https://github.com/Tushar-Kumar-dev/ghar-se-grocery.git
+cd ghar-se-grocery
+
+# Spin up MySQL and Spring Boot in containers
+docker-compose up -d
+
+# Start Frontend locally
+cd frontend
+npm install
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+- **Frontend App**: `http://localhost:5173`
+- **Backend Swagger API**: `http://localhost:8080/swagger-ui.html`
+- **MySQL Database**: `localhost:3306` (`sibms`)
 
-### 3. Build for Production
+---
+
+### Option B: Native Manual Setup
+
+#### 1. Backend (Spring Boot 3)
 ```bash
-npm run build
+cd backend
+# Run database migrations and start server
+mvn clean spring-boot:run
+```
+
+#### 2. Frontend (React + Vite)
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
 ---
 
-## 🌟 Key Features
+## 🌐 Production Deployment Architecture (₹0 / Free Tier)
 
-1. **POS Billing Register (F2)**:
-   - High-speed product catalog with categories (Flours, Oils, Dairy, Beverages, Snacks, Personal Care).
-   - Barcode Scanner Gun simulation with authentic **880Hz audio tone**.
-   - Customer Khata lookup with previous balance due alerts.
-   - Live tax calculations (CGST 2.5% + SGST 2.5%), flat discount, and grand total.
-   - **Authentic 80mm Thermal Receipt**: Perforated paper cuts, store GSTIN, itemized break-up, UPI QR code, and browser print (`Ctrl+P`).
-
-2. **Inward Online Orders Hub (F4)**:
-   - Real-time synchronization with customer ordering portal.
-   - Support for **Handwritten Grocery Parchi Photo Inspection** with high-res magnifier.
-   - 4-Step Live Order Pipeline: `Received` ➔ `Packing` ➔ `Dispatched / Counter Ready` ➔ `Completed`.
-   - Direct status sync back to customer app!
-
-3. **Master Store Home Delivery Switch**:
-   - Hardware-style toggle in Top Bar and Settings:
-     - `[GREEN LED] Home Delivery ACTIVE`
-     - `[AMBER LED] Home Delivery PAUSED (Counter Pickup Only)`
-   - Instant cross-tab broadcast that tells the customer app whether this store is delivering.
-
-4. **Inventory & Real-Time Stock Ledger (F10)**:
-   - Live stock catalog, threshold badges, low stock warnings (&le; 10 units).
-   - Stock inward / damage adjustment modal.
-
-5. **Customer Khata (Digital Udhaar Bahi-Khata) (F8)**:
-   - Track credit accounts, record payments received with instant balance deduction, and send simulated WhatsApp reminders.
-
-6. **Purchase Orders (F9)**:
-   - Wholesale orders from FMCG vendors (ITC, Adani Wilmar, Amul) with Goods Receipt Note (GRN) verification.
-
-7. **Store Delivery Policy Settings**:
-   - Configure minimum order value for free delivery, fee for small orders, radius, and SLA.
+| Service | Hosting Platform | Tier | Purpose |
+|---|---|---|---|
+| **Frontend** | [Vercel](https://vercel.com) | Free Hobby | Global Edge CDN distribution, automated branch previews |
+| **Backend** | [Render.com](https://render.com) | Free Web Service | Multi-stage Dockerized Spring Boot 3 JRE container |
+| **Database** | [TiDB Cloud](https://tidbcloud.com) | Free Serverless | 5 GB MySQL 8.0 wire-compatible cloud cluster |
 
 ---
 
-## ⌨️ Global Keyboard Shortcuts
-
-| Shortcut | Action |
-|:---|:---|
-| **F2** | Open POS Billing Counter |
-| **F4** | Open Inward Online Orders Hub |
-| **F8** | Open Customer Khata (Udhaar) |
-| **F9** | Open Purchase Orders & Suppliers |
-| **F10** | Open Inventory & Stock Ledger |
-| **Ctrl + P** | Print 80mm Thermal POS Receipt |
+## 📄 License
+This project is licensed under the [MIT License](LICENSE).

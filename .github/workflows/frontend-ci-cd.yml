@@ -10,10 +10,15 @@ on:
     branches:
       - main
       - master
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci-cd.yml'
   pull_request:
     branches:
       - main
       - master
+    paths:
+      - 'frontend/**'
 
 # Ensure only one deploy runs at a time for this branch
 concurrency:
@@ -38,20 +43,23 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
 
       - name: 📦 Install Dependencies
+        working-directory: frontend
         run: npm ci
 
       - name: 🔨 Build Production Bundle (Vite)
+        working-directory: frontend
         run: npm run build
         env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'https://api.sibmsgrocery.com/api' }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL || 'http://localhost:8080/api' }}
 
       - name: 📤 Archive Production Artifacts (dist)
         uses: actions/upload-artifact@v4
         with:
           name: frontend-dist-bundle
-          path: dist/
+          path: frontend/dist/
           retention-days: 7
 
   # --------------------------------------------------------------------------
@@ -68,13 +76,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-dist-bundle
-          path: dist/
+          path: frontend/dist/
 
-      - name: 🌐 Deploy to Vercel (or Netlify / GitHub Pages)
+      - name: 🌐 Deploy to Vercel
         run: |
           echo "========================================================"
           echo "✅ Production artifacts verified and ready for deployment!"
-          echo "Target Host: Vercel / Cloudflare / Netlify Edge Network"
+          echo "Target Host: Vercel CDN Edge Network"
           echo "========================================================"
-          # If using Vercel CLI or Webhook:
-          # npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
