@@ -1,5 +1,5 @@
-// API Client for Spring Boot Backend (Uses VITE_API_URL in production, fallback to proxy '/api' in dev)
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+// API Client for Spring Boot Backend (Uses VITE_API_URL or defaults to live Render backend in production)
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://ghar-se-grocery.onrender.com/api' : '/api');
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('sibms_auth_token');
